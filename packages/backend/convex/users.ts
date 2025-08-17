@@ -23,7 +23,7 @@ export const add = mutation({
       throw new Error("Thiếu tổ chức");
     }
 
-    // throw new Error("Kiểm tra theo dõi");
+    throw new Error("Kiểm tra theo dõi");
 
     const userId = await ctx.db.insert("users", {
       name: "Mrlongruoi",
