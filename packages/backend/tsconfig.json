@@ -3,7 +3,7 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@workspace/backend/*": ["./cnnvex/*"]
+      "@workspace/backend/*": ["./convex/*"]
     }
   },
   "include": ["."],
