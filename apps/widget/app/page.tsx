@@ -1,19 +1,19 @@
 "use client";
 
-import { useMutation } from 'convex/react';
-import { api } from "@workspace/backend/_generated/api";
-import { Button } from '@workspace/ui/components/button';
-import { UserButton, OrganizationSwitcher } from "@clerk/nextjs";
+import { use } from "react";
+import { WidgetView } from "@/modules/widget/ui/views/widget-view";
 
-export default function Page() {
-  const addUser = useMutation(api.users.add);
+interface Props {
+  searchParams: Promise<{ organizationId: string }>
+}
+
+const Page = ({ searchParams }: Props) => {
+
+  const { organizationId } = use(searchParams)
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-svh">
-      <p>Apps/Widget</p>
-      <UserButton />
-      <OrganizationSwitcher hidePersonal/>
-      <Button onClick={() => addUser()}>Add</Button>
-    </div>
+    <WidgetView organizationId={organizationId} />
   )
 }
+
+export default Page;
