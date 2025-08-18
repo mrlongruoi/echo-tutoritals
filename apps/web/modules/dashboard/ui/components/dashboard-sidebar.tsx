@@ -1,9 +1,5 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
-import { cn } from "@workspace/ui/lib/utils";
 import {
     CreditCardIcon,
     InboxIcon,
@@ -12,6 +8,10 @@ import {
     Mic,
     PaletteIcon
 } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { OrganizationSwitcher, UserButton } from "@clerk/nextjs";
+import { cn } from "@workspace/ui/lib/utils";
 import {
     Sidebar,
     SidebarContent,
@@ -73,7 +73,7 @@ export const DashboardSidebar = () => {
         if (url === "/") {
             return pathName === "/";
         }
-        return pathName?.startsWith(url);
+        return pathName.startsWith(url);
     }
 
     return (
@@ -186,6 +186,7 @@ export const DashboardSidebar = () => {
                     </SidebarGroupContent>
                 </SidebarGroup>
             </SidebarContent>
+            
             <SidebarFooter>
                 <SidebarMenu>
                     <SidebarMenuItem>
