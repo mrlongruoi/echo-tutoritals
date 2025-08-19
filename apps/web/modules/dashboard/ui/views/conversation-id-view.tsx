@@ -240,7 +240,7 @@ export const ConversationIdViewLoading = () => {
                 </Button>
             </header>
 
-            <AIConversation className="max-h-[calc(100vc-180px)]">
+            <AIConversation className="max-h-[calc(100vh-180px)]">
                 <AIConversationContent>
                     {Array.from({ length: 8 }, (_, index) => {
                         const isUser = index % 2 === 0;
