@@ -5,6 +5,61 @@ import { query } from "../_generated/server";
 import { supportAgent } from "../system/ai/agents/supportAgent";
 import { Doc } from "../_generated/dataModel";
 
+export const getOne = query({
+  args: {
+    conversationId: v.id("conversations"),
+  },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (identity === null) {
+      throw new ConvexError({
+        code: "UNAUTHORIZED",
+        message: "Danh tính không tìm thấy",
+      });
+    }
+
+    const orgId = identity.orgId as string;
+
+    if (!orgId) {
+      throw new ConvexError({
+        code: "UNAUTHORIZED",
+        message: "Tổ chức không tìm thấy",
+      });
+    }
+
+    const conversation = await ctx.db.get(args.conversationId);
+
+    if (!conversation) {
+      throw new ConvexError({
+        code: "NOT_FOUND",
+        message: "Cuộc trò chuyện không tìm thấy",
+      });
+    }
+
+    if (conversation.organizationId !== orgId) {
+      throw new ConvexError({
+        code: "UNAUTHORIZED",
+        message: "ID tổ chức không hợp lệ",
+      });
+    }
+
+    const contactSession = await ctx.db.get(conversation.contactSessionId);
+
+    if (!conversation) {
+      throw new ConvexError({
+        code: "NOT_FOUND",
+        message: "Không tìm thấy phiên liên hệ",
+      });
+    }
+
+    return {
+      ...conversation,
+      contactSession,
+    };
+  },
+});
+
 export const getMany = query({
   args: {
     paginationOpts: paginationOptsValidator,
