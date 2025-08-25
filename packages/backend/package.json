@@ -2,8 +2,8 @@
   "name": "@workspace/backend",
   "type": "module",
   "scripts": {
-    "dev": "convex dev",
-    "setup": "convex dev --until-success"
+    "dev": "cross-env NODE_OPTIONS=--max-old-space-size=8192 convex dev",
+    "setup": "cross-env NODE_OPTIONS=--max-old-space-size=8192 convex dev --until-success"
   },
   "exports": {
     "./convex": "./convex/*.ts",
@@ -12,6 +12,7 @@
   "devDependencies": {
     "@types/node": "^20.19.9",
     "@workspace/typescript-config": "workspace:*",
+    "cross-env": "^10.0.0",
     "typescript": "latest"
   },
   "dependencies": {

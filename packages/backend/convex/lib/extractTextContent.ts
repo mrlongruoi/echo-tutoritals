@@ -19,7 +19,7 @@ const SUPPORTED_IMAGE_TYPES = [
 
 const SYSTEM_PROMPTS = {
   image:
-    "You turn images into text. If it is a photo of a document, transcribe it. If it isnot a document, describe it.",
+    "You turn images into text. If it is a photo of a document, transcribe it. If it is not a document, describe it.",
   pdf: "You transform PDF files into text.",
   html: "You transform content into markdown.",
 };
@@ -53,7 +53,7 @@ export async function extractTextContent(
     return extractTextFileContent(ctx, storageId, bytes, mimeType);
   }
 
-  throw new Error(`Unsupported MIME type: ${mimeType}`);
+  throw new Error(`Loại MIME không được hỗ trợ: ${mimeType}`);
 }
 
 async function extractTextFileContent(
